@@ -1,16 +1,14 @@
 import Image from "next/image";
 
-import { getRestaurantBySlug } from "@/data/get-restaurant-by-slug";
-import { Card, CardContent } from "@/components/ui/card";
-import { notFound } from "next/navigation";
-import { Button } from "@/components/ui/button";
 import { ConsumptionMethodOptions } from "./components/consumption-method-options";
+import { getRestaurantBySlug } from "@/data/get-restaurant-by-slug";
+import { notFound } from "next/navigation";
 
 interface RestaurantPageProps {
   params: Promise<{ slug: string }>;
 }
 
-const RestaurantPage = async ({ params }: RestaurantPageProps) => {
+export default async function RestaurantPage({ params }: RestaurantPageProps) {
   const { slug } = await params;
   const restaurant = await getRestaurantBySlug(slug);
 
@@ -54,6 +52,4 @@ const RestaurantPage = async ({ params }: RestaurantPageProps) => {
       </div>
     </div>
   );
-};
-
-export default RestaurantPage;
+}

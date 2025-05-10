@@ -13,13 +13,13 @@ interface ConsumptionMethodOptionsProps {
   slug: string;
 }
 
-export const ConsumptionMethodOptions = ({
+export function ConsumptionMethodOptions({
   imageUrl,
   buttonText,
   altText,
   option,
   slug,
-}: ConsumptionMethodOptionsProps) => {
+}: ConsumptionMethodOptionsProps) {
   return (
     <Card>
       <CardContent className="flex flex-col items-center gap-8 py-8">
@@ -34,4 +34,4 @@ export const ConsumptionMethodOptions = ({
       </CardContent>
     </Card>
   );
-};
+}
