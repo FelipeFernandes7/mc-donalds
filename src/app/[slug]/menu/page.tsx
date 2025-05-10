@@ -12,7 +12,7 @@ function isConsumptionMethodValid(method: string) {
   return ["DINE_IN", "TAKEAWAY"].includes(method.toUpperCase());
 }
 
-export async function RestaurantMenuPage({
+export default async function RestaurantMenuPage({
   params,
   searchParams,
 }: RestaurantMenuPageProps) {
