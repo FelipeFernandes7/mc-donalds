@@ -1,9 +1,16 @@
-import { Restaurant } from "@prisma/client";
-import { Clock } from "lucide-react";
 import Image from "next/image";
 
+import { Prisma } from "@prisma/client";
+import { Clock } from "lucide-react";
+
 interface RestaurantCategoriesProps {
-  restaurant: Restaurant;
+  restaurant: Prisma.RestaurantGetPayload<{
+    include: {
+      menuCategories: {
+        include: { products: true };
+      };
+    };
+  }>;
 }
 
 export function RestaurantCategories({
