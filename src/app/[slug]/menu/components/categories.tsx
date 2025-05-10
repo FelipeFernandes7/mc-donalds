@@ -57,7 +57,7 @@ export function RestaurantCategories({
           <p>Aberto</p>
         </div>
       </div>
-      <ScrollArea className="w-full">
+      <ScrollArea className="w-full ">
         <div className="flex w-max space-x-4 px-4 pt-0">
           {restaurant.menuCategories.map((category) => (
             <Button
