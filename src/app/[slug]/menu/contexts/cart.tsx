@@ -26,7 +26,24 @@ export function CartProvider({ children }: { children: ReactNode }) {
   };
 
   const addProduct = (product: CartProduct) => {
-    setProducts((prev) => [...prev, product]);
+    const productIsAlreadyOnTheCart = products.some(
+      (prevProduct) => prevProduct.id === product.id
+    );
+    if (productIsAlreadyOnTheCart) {
+      return setProducts((prev) => [...prev, product]);
+    }
+
+    setProducts((prevProducts) => {
+      return prevProducts.map((prev) => {
+        if (prev.id === product.id) {
+          return {
+            ...prev,
+            quantity: prev.quantity + product.quantity,
+          };
+        }
+        return prev;
+      });
+    });
   };
 
   return (
