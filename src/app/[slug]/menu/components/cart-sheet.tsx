@@ -4,7 +4,6 @@ import {
   SheetDescription,
   SheetHeader,
   SheetTitle,
-  SheetTrigger,
 } from "@/components/ui/sheet";
 import { useCart } from "../contexts/cart";
 
@@ -12,7 +11,6 @@ export function CartSheet() {
   const { isOpen, toggleCart } = useCart();
   return (
     <Sheet open={isOpen} onOpenChange={toggleCart}>
-      <SheetTrigger>Open</SheetTrigger>
       <SheetContent>
         <SheetHeader>
           <SheetTitle>Are you absolutely sure?</SheetTitle>

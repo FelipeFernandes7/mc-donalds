@@ -23,7 +23,7 @@ interface ProductDetailProps {
 
 export function ProductDetail({ product }: ProductDetailProps) {
   const [quantity, setQuantity] = useState<number>(1);
-  const { toggleCart } = useCart();
+  const { toggleCart, addProduct } = useCart();
 
   const handleIncrement = () => {
     setQuantity((prev) => prev + 1);
@@ -34,6 +34,14 @@ export function ProductDetail({ product }: ProductDetailProps) {
       if (prev === 1) return prev;
       return prev - 1;
     });
+  };
+
+  const handleAddToCart = () => {
+    addProduct({
+      ...product,
+      quantity,
+    });
+    toggleCart();
   };
 
   return (
@@ -100,7 +108,7 @@ export function ProductDetail({ product }: ProductDetailProps) {
           </ScrollArea>
         </div>
 
-        <Button onClick={toggleCart} className="rounded-full w-full">
+        <Button onClick={handleAddToCart} className="rounded-full w-full">
           Adicionar à sacola
         </Button>
       </div>
