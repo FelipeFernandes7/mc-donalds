@@ -1,3 +1,4 @@
+"use client";
 import {
   Sheet,
   SheetContent,
@@ -9,9 +10,12 @@ import { CartProductItem } from "./cart-product-item";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { formatCurrency } from "@/helpers/format-currency";
+import { FinishOrderDialog } from "./finish-order-dialog";
+import { useState } from "react";
 
 export function CartSheet() {
   const { isOpen, toggleCart, products, total } = useCart();
+  const [finishOrderDialogIsOpen, setFinishOrderDialogIsOpen] = useState(false);
   return (
     <Sheet open={isOpen} onOpenChange={toggleCart}>
       <SheetContent className="w-[90%]">
@@ -33,7 +37,16 @@ export function CartSheet() {
               </div>
             </CardContent>
           </Card>
-          <Button className="w-full rounded-full">Finalizar pedido</Button>
+          <Button
+            onClick={() => setFinishOrderDialogIsOpen(true)}
+            className="w-full rounded-full"
+          >
+            Finalizar pedido
+          </Button>
+          <FinishOrderDialog
+            open={finishOrderDialogIsOpen}
+            onOpenChange={setFinishOrderDialogIsOpen}
+          />
         </div>
       </SheetContent>
     </Sheet>
