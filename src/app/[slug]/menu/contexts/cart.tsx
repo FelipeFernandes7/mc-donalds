@@ -12,6 +12,7 @@ export interface ICartContext {
   isOpen: boolean;
   products: CartProduct[];
   toggleCart: () => void;
+  removeProduct: (productId: string) => void;
   addProduct: (product: CartProduct) => void;
   decreaseProductQuantity: (productId: string) => void;
   increaseProductQuantity: (productId: string) => void;
@@ -74,6 +75,12 @@ export function CartProvider({ children }: { children: ReactNode }) {
     });
   };
 
+  const removeProduct = (productId: string) => {
+    setProducts((prevProducts) => {
+      return prevProducts.filter((prevProduct) => prevProduct.id !== productId);
+    });
+  };
+
   return (
     <CartContext.Provider
       value={{
@@ -81,6 +88,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
         products,
         toggleCart,
         addProduct,
+        removeProduct,
         decreaseProductQuantity,
         increaseProductQuantity,
       }}
