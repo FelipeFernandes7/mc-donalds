@@ -8,6 +8,9 @@ import { Button } from "@/components/ui/button";
 import { Prisma } from "@prisma/client";
 import { useState } from "react";
 import { Products } from "./products";
+import { useCart } from "../contexts/cart";
+import { formatCurrency } from "@/helpers/format-currency";
+import { CartSheet } from "./cart-sheet";
 
 interface RestaurantCategoriesProps {
   restaurant: Prisma.RestaurantGetPayload<{
@@ -37,8 +40,10 @@ export function RestaurantCategories({
     return selectedCategory.id === category.id ? "default" : "secondary";
   };
 
+  const { products, total, totalQuantity, toggleCart } = useCart();
+
   return (
-    <div className="relative z-50 mt-[-1.5rem] rounded-t-3xl bg-white">
+    <div className="w-full relative z-50 mt-[-1.5rem] rounded-t-3xl bg-white">
       <div className="p-5">
         <div className="flex items-center gap-3 ">
           <Image
@@ -73,8 +78,26 @@ export function RestaurantCategories({
         </div>
         <ScrollBar orientation="horizontal" />
       </ScrollArea>
+
       <h3 className="px-5 font-semibold pt-2">{selectedCategory.name}</h3>
       <Products products={selectedCategory.products} />
+
+      {products.length > 0 && (
+        <div className="w-full fixed bottom-0 left-0 right-0 flex items-center justify-between border-t bg-white px-5 py-3">
+          <div>
+            <p className="text-xs text-muted-foreground">Total dos pedidos</p>
+            <p className="text-sm font-semibold">
+              {formatCurrency(total)}{" "}
+              <span className="text-xs font-normal text-muted-foreground">
+                / {totalQuantity} {totalQuantity > 1 ? "itens" : "item"}
+              </span>
+            </p>
+          </div>
+
+          <Button onClick={toggleCart}>Ver sacola</Button>
+          <CartSheet />
+        </div>
+      )}
     </div>
   );
 }
