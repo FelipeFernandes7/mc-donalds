@@ -11,6 +11,7 @@ export interface CartProduct
 export interface ICartContext {
   isOpen: boolean;
   products: CartProduct[];
+  total: number;
   toggleCart: () => void;
   removeProduct: (productId: string) => void;
   addProduct: (product: CartProduct) => void;
@@ -27,6 +28,10 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const toggleCart = () => {
     setIsOpen((prev) => !prev);
   };
+
+  const total = products.reduce((acc, product) => {
+    return acc + product.price * product.quantity;
+  }, 0);
 
   const addProduct = (product: CartProduct) => {
     const productIsAlreadyOnTheCart = products.some(
@@ -85,6 +90,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
     <CartContext.Provider
       value={{
         isOpen,
+        total,
         products,
         toggleCart,
         addProduct,
