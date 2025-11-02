@@ -98,63 +98,61 @@ export function FinishOrderDialog({
             Insira suas informações abaixo para finalizar o seu pedido
           </DrawerDescription>
         </DrawerHeader>
-        <div className="p-5">
-          <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-              <FormField
-                control={form.control}
-                name="name"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Nome</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Digite seu nome..." {...field} />
-                    </FormControl>
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+            <FormField
+              control={form.control}
+              name="name"
+              render={({ field }) => (
+                <FormItem className="px-4">
+                  <FormLabel>Nome</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Digite seu nome..." {...field} />
+                  </FormControl>
 
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
-              <FormField
-                control={form.control}
-                name="cpf"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>CPF</FormLabel>
-                    <FormControl>
-                      <PatternFormat
-                        format="###.###.###-##"
-                        placeholder="___.___.___-__"
-                        customInput={Input}
-                        {...field}
-                      />
-                    </FormControl>
+            <FormField
+              control={form.control}
+              name="cpf"
+              render={({ field }) => (
+                <FormItem className="px-4">
+                  <FormLabel>CPF</FormLabel>
+                  <FormControl>
+                    <PatternFormat
+                      format="###.###.###-##"
+                      placeholder="___.___.___-__"
+                      customInput={Input}
+                      {...field}
+                    />
+                  </FormControl>
 
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
-              <DrawerFooter>
-                <Button
-                  className="w-full rounded-full"
-                  type="submit"
-                  variant="destructive"
-                  disabled={isPending}
-                >
-                  {isPending && <Loader2Icon className="animate-spin" />}
-                  Finalizar
+            <DrawerFooter>
+              <Button
+                className="w-full rounded-full"
+                type="submit"
+                variant="destructive"
+                disabled={isPending}
+              >
+                {isPending && <Loader2Icon className="animate-spin" />}
+                Finalizar
+              </Button>
+              <DrawerClose asChild>
+                <Button className="w-full rounded-full" variant={"outline"}>
+                  Cancel
                 </Button>
-                <DrawerClose asChild>
-                  <Button className="w-full rounded-full" variant={"outline"}>
-                    Cancel
-                  </Button>
-                </DrawerClose>
-              </DrawerFooter>
-            </form>
-          </Form>
-        </div>
+              </DrawerClose>
+            </DrawerFooter>
+          </form>
+        </Form>
       </DrawerContent>
     </Drawer>
   );

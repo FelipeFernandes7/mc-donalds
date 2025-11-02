@@ -24,7 +24,7 @@ export function CartSheet() {
         </SheetHeader>
 
         <div className="flex flex-col h-full py-5">
-          <div className="flex-auto">
+          <div className="flex-auto space-y-5">
             {products.map((product) => (
               <CartProductItem key={product.id} product={product} />
             ))}
